@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B's Mobile Auto Detailing — Twin Cities, MN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080810;
+    --navy: #0d1117;
+    --dark-blue: #0f1e35;
+    --mid-blue: #1a3a5c;
+    --blue: #1e6fd9;
+    --blue-light: #3d8ef0;
+    --blue-pale: #a8cbf5;
+    --yellow: #f5c518;
+    --yellow-light: #ffe066;
+    --white: #f8f8ff;
+    --off-white: #dde4f0;
+    --gray: #6b7a99;
+    --dark-gray: #2a3348;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--black); color:var(--white); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1rem 3rem;
+    background:rgba(8,8,16,0.95);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(30,111,217,0.25);
+  }
+  .nav-logo {
+    font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:0.1em;
+    color:var(--yellow); text-decoration:none; display:flex; align-items:center; gap:0.5rem;
+  }
+  .nav-bee {
+    width:36px; height:36px; background:var(--blue); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+  }
+  .nav-logo span { color:var(--white); }
+  .nav-links { display:flex; gap:2.2rem; list-style:none; }
+  .nav-links a {
+    color:var(--gray); text-decoration:none; font-size:0.78rem;
+    letter-spacing:0.12em; text-transform:uppercase; font-weight:400; transition:color .25s;
+  }
+  .nav-links a:hover { color:var(--yellow); }
+  .nav-cta {
+    background:var(--yellow) !important; color:var(--black) !important;
+    padding:0.5rem 1.3rem; font-weight:500 !important;
+  }
+  .nav-cta:hover { background:var(--yellow-light) !important; }
+
+  /* HERO */
+  .hero {
+    min-height:100vh; display:flex; align-items:center;
+    position:relative; overflow:hidden; padding:7rem 3rem 3rem;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(135deg, rgba(30,111,217,0.13) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 50%, rgba(245,197,24,0.05) 0%, transparent 65%),
+      var(--navy);
+  }
+  .hero-bg::before {
+    content:''; position:absolute; inset:0;
+    background-image:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(30,111,217,0.03) 40px,rgba(30,111,217,0.03) 41px);
+  }
+  .hero-bg::after {
+    content:''; position:absolute; top:0; left:0; bottom:0;
+    width:4px; background:linear-gradient(to bottom, var(--yellow), var(--blue), transparent);
+  }
+  .hero-content { position:relative; z-index:2; max-width:680px; }
+  .hero-eyebrow {
+    font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--yellow); margin-bottom:1.2rem;
+    display:flex; align-items:center; gap:1rem;
+  }
+  .hero-eyebrow::before { content:''; display:block; width:40px; height:2px; background:var(--yellow); }
+  .hero h1 {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(3.8rem,8.5vw,7.5rem);
+    line-height:0.92; letter-spacing:0.02em; color:var(--white); margin-bottom:1.2rem;
+  }
+  .hero h1 .ay { color:var(--yellow); }
+  .hero h1 .ab { color:var(--blue-light); }
+  .hero-sub {
+    font-size:1rem; color:var(--gray); font-weight:300;
+    line-height:1.75; max-width:480px; margin-bottom:2rem;
+  }
+  .hero-actions { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+  .btn-primary {
+    display:inline-block; background:var(--yellow); color:var(--black);
+    padding:0.9rem 2.2rem; font-size:0.82rem; font-weight:500;
+    letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; transition:background .25s;
+  }
+  .btn-primary:hover { background:var(--yellow-light); }
+  .btn-secondary {
+    display:inline-block; border:1px solid rgba(30,111,217,0.5); color:var(--blue-light);
+    padding:0.9rem 2.2rem; font-size:0.82rem; font-weight:400;
+    letter-spacing:0.12em; text-transform:uppercase; text-decoration:none; transition:all .25s;
+  }
+  .btn-secondary:hover { border-color:var(--blue-light); background:rgba(30,111,217,0.08); }
+  .hero-stats {
+    position:absolute; bottom:3rem; right:3rem;
+    display:flex; gap:2.5rem; z-index:2;
+  }
+  .stat-item { text-align:right; }
+  .stat-num { font-family:'Bebas Neue',sans-serif; font-size:2.6rem; color:var(--yellow); line-height:1; }
+  .stat-label { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gray); margin-top:0.2rem; }
+
+  /* MOBILE BADGE */
+  .mobile-badge {
+    display:inline-flex; align-items:center; gap:0.6rem;
+    background:rgba(30,111,217,0.12); border:1px solid rgba(30,111,217,0.3);
+    padding:0.5rem 1rem; margin-bottom:1.5rem;
+    font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--blue-pale);
+  }
+  .mobile-badge .dot { width:8px; height:8px; background:var(--yellow); border-radius:50%; }
+
+  /* SECTIONS */
+  section { padding:6rem 3rem; }
+  .section-eyebrow { font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--blue-light); text-align:center; margin-bottom:0.8rem; }
+  .section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,5vw,4rem); text-align:center; letter-spacing:0.05em; margin-bottom:1rem; color:var(--white); }
+  .section-sub { text-align:center; color:var(--gray); font-size:0.95rem; font-weight:300; max-width:520px; margin:0 auto 4rem; line-height:1.7; }
+
+  /* SERVICES */
+  #services { background:var(--navy); }
+  .services-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:rgba(30,111,217,0.12); border:1px solid rgba(30,111,217,0.15);
+    max-width:1100px; margin:0 auto;
+  }
+  .service-card {
+    background:var(--navy); padding:2.2rem; transition:background .3s;
+    position:relative; overflow:hidden;
+  }
+  .service-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(to right, var(--blue), var(--yellow));
+    transform:scaleX(0); transition:transform .3s; transform-origin:left;
+  }
+  .service-card:hover { background:var(--dark-blue); }
+  .service-card:hover::before { transform:scaleX(1); }
+  .service-icon { width:44px; height:44px; margin-bottom:1.2rem; }
+  .service-name { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.06em; color:var(--white); margin-bottom:0.6rem; }
+  .service-desc { font-size:0.86rem; color:var(--gray); font-weight:300; line-height:1.7; margin-bottom:1.2rem; }
+  .service-price { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:var(--yellow); letter-spacing:0.05em; }
+  .service-price span { font-family:'DM Sans',sans-serif; font-size:0.75rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; font-weight:300; margin-left:0.3rem; }
+
+  /* PACKAGES */
+  #packages { background:var(--black); }
+  .packages-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; max-width:900px; margin:0 auto; }
+  .package-card {
+    background:var(--navy); border:1px solid rgba(30,111,217,0.18);
+    padding:2.2rem; position:relative; transition:border-color .3s;
+  }
+  .package-card:hover { border-color:rgba(30,111,217,0.45); }
+  .package-card.featured { border-color:var(--yellow); background:var(--dark-blue); }
+  .package-badge {
+    position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+    background:var(--yellow); color:var(--black);
+    font-size:0.62rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; padding:0.3rem 1.1rem;
+  }
+  .package-name { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; letter-spacing:0.08em; color:var(--white); margin-bottom:0.3rem; margin-top:0.5rem; }
+  .package-tagline { font-size:0.75rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
+  .package-price { font-family:'Bebas Neue',sans-serif; font-size:3rem; color:var(--yellow); line-height:1; letter-spacing:0.02em; margin-bottom:0.3rem; }
+  .package-price-note { font-size:0.7rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
+  .package-divider { height:1px; background:rgba(30,111,217,0.18); margin-bottom:1.5rem; }
+  .package-features { list-style:none; margin-bottom:2rem; }
+  .package-features li {
+    font-size:0.86rem; color:var(--off-white); font-weight:300;
+    padding:0.45rem 0; display:flex; align-items:center; gap:0.7rem;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .package-features li::before { content:''; display:block; width:6px; height:6px; background:var(--blue); flex-shrink:0; border-radius:50%; }
+  .package-card.featured .package-features li::before { background:var(--yellow); }
+
+  /* MEMBERSHIPS */
+  #memberships { background:var(--dark-blue); }
+  .memberships-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; max-width:800px; margin:0 auto; }
+  .membership-card {
+    background:var(--navy); border:2px solid rgba(30,111,217,0.25);
+    padding:2.5rem; position:relative; text-align:center; transition:border-color .3s;
+  }
+  .membership-card:hover { border-color:var(--blue); }
+  .membership-card.gold { border-color:var(--yellow); background:rgba(245,197,24,0.04); }
+  .membership-freq {
+    font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--blue-pale); margin-bottom:0.5rem;
+  }
+  .membership-card.gold .membership-freq { color:var(--yellow); }
+  .membership-name { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:0.08em; color:var(--white); margin-bottom:0.3rem; }
+  .membership-price { font-family:'Bebas Neue',sans-serif; font-size:3.5rem; color:var(--yellow); line-height:1; margin-bottom:0.3rem; }
+  .membership-per { font-size:0.72rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.5rem; }
+  .membership-divider { height:1px; background:rgba(30,111,217,0.2); margin-bottom:1.5rem; }
+  .membership-features { list-style:none; text-align:left; margin-bottom:2rem; }
+  .membership-features li {
+    font-size:0.86rem; color:var(--off-white); font-weight:300;
+    padding:0.45rem 0; display:flex; align-items:center; gap:0.7rem;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .membership-features li::before { content:'✓'; color:var(--blue); font-weight:500; font-size:0.8rem; flex-shrink:0; }
+  .membership-card.gold .membership-features li::before { color:var(--yellow); }
+  .member-benefits {
+    max-width:800px; margin:2.5rem auto 0;
+    background:rgba(30,111,217,0.08); border:1px solid rgba(30,111,217,0.2);
+    padding:1.5rem 2rem; display:flex; gap:2.5rem; justify-content:center; flex-wrap:wrap;
+  }
+  .benefit-item { display:flex; align-items:center; gap:0.7rem; font-size:0.82rem; color:var(--off-white); font-weight:300; }
+  .benefit-icon { color:var(--yellow); font-size:1rem; }
+
+  /* WHY */
+  #why { background:var(--navy); }
+  .why-points { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; max-width:900px; margin:0 auto; }
+  .why-point {
+    background:var(--dark-blue); border:1px solid rgba(30,111,217,0.15);
+    padding:2rem; display:flex; gap:1.2rem; align-items:flex-start; transition:border-color .3s;
+  }
+  .why-point:hover { border-color:rgba(30,111,217,0.4); }
+  .why-point-num { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; color:rgba(245,197,24,0.2); line-height:1; flex-shrink:0; width:44px; }
+  .why-point-title { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:0.06em; color:var(--white); margin-bottom:0.4rem; }
+  .why-point-desc { font-size:0.86rem; color:var(--gray); font-weight:300; line-height:1.7; }
+
+  /* TESTIMONIALS */
+  #testimonials { background:var(--black); }
+  .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  .testimonial-card {
+    background:var(--dark-blue); border:1px solid rgba(30,111,217,0.15);
+    border-top:3px solid var(--blue); padding:2rem;
+  }
+  .testimonial-card:nth-child(2) { border-top-color:var(--yellow); }
+  .testimonial-card:nth-child(3) { border-top-color:var(--blue-light); }
+  .stars { color:var(--yellow); font-size:0.85rem; letter-spacing:0.1em; margin-bottom:1rem; }
+  .testimonial-text { font-size:0.9rem; color:var(--off-white); font-style:italic; font-weight:300; line-height:1.75; margin-bottom:1.2rem; }
+  .testimonial-author { display:flex; align-items:center; gap:0.8rem; }
+  .author-avatar {
+    width:36px; height:36px; background:var(--mid-blue); border:1px solid var(--blue);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Bebas Neue',sans-serif; font-size:0.9rem; color:var(--blue-pale);
+    flex-shrink:0; border-radius:50%;
+  }
+  .author-name { font-size:0.83rem; font-weight:500; color:var(--white); }
+  .author-vehicle { font-size:0.73rem; color:var(--gray); font-weight:300; }
+
+  /* BOOK */
+  #book { background:var(--navy); }
+  .book-inner { max-width:680px; margin:0 auto; }
+  .book-bar { height:4px; background:linear-gradient(to right, var(--blue), var(--yellow)); margin-bottom:2.5rem; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:0.5rem; }
+  .form-group.full { grid-column:1/-1; }
+  label { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--blue-pale); }
+  input, select, textarea {
+    background:var(--dark-blue); border:1px solid rgba(30,111,217,0.25); color:var(--white);
+    padding:0.8rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:300;
+    outline:none; transition:border-color .2s; width:100%;
+  }
+  input:focus, select:focus, textarea:focus { border-color:var(--blue); }
+  select option { background:var(--navy); }
+  textarea { resize:vertical; min-height:90px; }
+  .form-submit {
+    background:var(--yellow); color:var(--black); border:none;
+    padding:1rem 3rem; font-family:'DM Sans',sans-serif; font-size:0.82rem;
+    font-weight:500; letter-spacing:0.15em; text-transform:uppercase;
+    cursor:pointer; margin-top:1.5rem; width:100%; transition:background .25s;
+  }
+  .form-submit:hover { background:var(--yellow-light); }
+
+  /* SOCIAL STRIP */
+  .social-strip {
+    background:var(--dark-blue); border-top:1px solid rgba(30,111,217,0.2);
+    padding:1rem 3rem; display:flex; align-items:center; justify-content:center;
+    gap:1.5rem; font-size:0.78rem; color:var(--gray);
+  }
+  .social-strip a { color:var(--blue-light); text-decoration:none; font-weight:400; }
+  .social-strip a:hover { color:var(--yellow); }
+
+  /* FOOTER */
+  footer { background:var(--navy); border-top:1px solid rgba(30,111,217,0.2); padding:0; }
+  .footer-top { height:4px; background:linear-gradient(to right, var(--blue), var(--yellow), var(--blue-light)); }
+  .footer-inner {
+    padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center;
+  }
+  .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.12em; color:var(--yellow); display:flex; align-items:center; gap:0.5rem; }
+  .footer-bee { width:26px; height:26px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.9rem; }
+  .footer-logo span { color:var(--off-white); }
+  .footer-tagline { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray); margin-top:0.4rem; }
+  .footer-info { text-align:right; font-size:0.8rem; color:var(--gray); font-weight:300; line-height:1.9; }
+  .footer-info a { color:var(--blue-light); text-decoration:none; }
+  .footer-info a:hover { color:var(--yellow); }
+
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+  .hero-eyebrow { animation:fadeInUp .7s ease forwards; }
+  .hero h1 { animation:fadeInUp .7s .15s ease both; }
+  .hero-sub { animation:fadeInUp .7s .3s ease both; }
+  .hero-actions { animation:fadeInUp .7s .45s ease both; }
+  .hero-stats { animation:fadeInUp .7s .6s ease both; }
+
+  @media (max-width:768px) {
+    nav { padding:1rem 1.5rem; }
+    .nav-links { display:none; }
+    .hero { padding:7rem 1.5rem 3rem; }
+    .hero-stats { position:static; margin-top:2.5rem; flex-wrap:wrap; justify-content:flex-start; gap:1.5rem; }
+    section { padding:4rem 1.5rem; }
+    .services-grid, .packages-grid, .memberships-grid, .testimonials-grid, .why-points { grid-template-columns:1fr; }
+    .form-grid { grid-template-columns:1fr; }
+    .footer-inner { flex-direction:column; gap:1.5rem; text-align:center; }
+    .footer-info { text-align:center; }
+    .social-strip { flex-wrap:wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-bee">🐝</div>
+    B'S <span>&nbsp;MOBILE AUTO DETAILING</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#memberships">Memberships</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#book" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="mobile-badge"><div class="dot"></div> Twin Cities, MN · We Come To You</div>
+    <div class="hero-eyebrow">Premium Mobile Auto Detailing</div>
+    <h1>YOUR CAR,<br><span class="ay">BRAND</span> <span class="ab">NEW.</span></h1>
+    <p class="hero-sub">B's Mobile Auto Detailing brings professional-grade detailing straight to your driveway, office, or anywhere in the Twin Cities metro. No drop-off. No hassle. Just results.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary">Book a Detail</a>
+      <a href="tel:6123849992" class="btn-secondary">Call / Text: 612-384-9992</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Mobile Service</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1 Yr+</div>
+      <div class="stat-label">In Business</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Avg Rating</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-eyebrow">What We Offer</div>
+  <h2 class="section-title">OUR SERVICES</h2>
+  <p class="section-sub">Every service is performed at your location — your home, office, or anywhere in the Twin Cities metro area.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#1e6fd9" stroke-width="1.5"/><path d="M14 24 C14 18 20 14 24 14 C28 14 34 18 34 24" stroke="#f5c518" stroke-width="1.5" fill="none"/><path d="M10 28 L38 28" stroke="#1e6fd9" stroke-width="1.5"/><circle cx="16" cy="33" r="3" stroke="#f5c518" stroke-width="1.5"/><circle cx="32" cy="33" r="3" stroke="#f5c518" stroke-width="1.5"/></svg>
+      <div class="service-name">Exterior Wash</div>
+      <p class="service-desc">Pre-wash, hand wash, ceramic wax, and tire shine for a head-turning finish every time.</p>
+      <div class="service-price">From $85 <span>starting</span></div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="32" height="22" rx="2" stroke="#1e6fd9" stroke-width="1.5"/><path d="M16 20 L32 20" stroke="#f5c518" stroke-width="1.5"/><path d="M16 26 L28 26" stroke="#f5c518" stroke-width="1.5"/></svg>
+      <div class="service-name">Interior Detail</div>
+      <p class="service-desc">Full vacuum, interior wipe-down, window cleaning, and complimentary air freshener.</p>
+      <div class="service-price">Included <span>in packages</span></div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><circle cx="17" cy="34" r="6" stroke="#1e6fd9" stroke-width="1.5"/><circle cx="31" cy="34" r="6" stroke="#1e6fd9" stroke-width="1.5"/><circle cx="17" cy="34" r="2.5" fill="rgba(245,197,24,0.3)"/><circle cx="31" cy="34" r="2.5" fill="rgba(245,197,24,0.3)"/><path d="M11 28 L8 22 L14 18 L34 18 L40 22 L37 28" stroke="#f5c518" stroke-width="1.5" fill="none"/></svg>
+      <div class="service-name">Wheel & Tire Detail</div>
+      <p class="service-desc">Wheel cleaning and tire shine to make every inch of your ride look pristine.</p>
+      <div class="service-price">Included <span>in packages</span></div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><path d="M24 8 L28 16 L38 17 L31 24 L33 34 L24 29 L15 34 L17 24 L10 17 L20 16 Z" stroke="#f5c518" stroke-width="1.5" fill="rgba(245,197,24,0.08)"/><circle cx="24" cy="22" r="4" stroke="#1e6fd9" stroke-width="1.2"/></svg>
+      <div class="service-name">Ceramic Coating</div>
+      <p class="service-desc">6-month ceramic coating or hand wax — long-lasting protection that repels water and UV rays.</p>
+      <div class="service-price">Included <span>in Ultimate</span></div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><rect x="10" y="18" width="28" height="16" rx="1" stroke="#1e6fd9" stroke-width="1.5"/><path d="M10 22 L38 22" stroke="#f5c518" stroke-width="1"/><path d="M10 26 L38 26" stroke="#f5c518" stroke-width="1"/><path d="M16 18 L16 14 L32 14 L32 18" stroke="#1e6fd9" stroke-width="1.5"/></svg>
+      <div class="service-name">Carpet Extraction</div>
+      <p class="service-desc">Deep carpet extraction to lift embedded dirt, stains, and odors from your vehicle's flooring.</p>
+      <div class="service-price">Included <span>in Basic Plus+</span></div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><path d="M12 36 L12 16 L24 10 L36 16 L36 36" stroke="#1e6fd9" stroke-width="1.5" fill="none"/><path d="M18 36 L18 26 L30 26 L30 36" stroke="#f5c518" stroke-width="1.5" fill="none"/><circle cx="24" cy="20" r="3" stroke="#f5c518" stroke-width="1.2"/></svg>
+      <div class="service-name">Engine Bay Cleaning</div>
+      <p class="service-desc">A clean engine bay is a healthy one. We degrease and detail under the hood for a complete transformation.</p>
+      <div class="service-price">Included <span>in Ultimate</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="section-eyebrow">Choose Your Level</div>
+  <h2 class="section-title">DETAIL PACKAGES</h2>
+  <p class="section-sub">Four packages to fit every need and budget. All prices vary by vehicle size and condition — SUVs, trucks, and vans are priced slightly higher.</p>
+
+  <div class="packages-grid">
+    <div class="package-card">
+      <div class="package-name">Basic Package</div>
+      <div class="package-tagline">The solid starting point</div>
+      <div class="package-price">$85</div>
+      <div class="package-price-note">Starting price · varies by size</div>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li>Pre-Wash</li>
+        <li>Exterior Wash</li>
+        <li>Ceramic Wax</li>
+        <li>Interior Vacuum</li>
+        <li>Interior Wipe Down</li>
+        <li>Tire Shine</li>
+      </ul>
+      <a href="#book" class="btn-secondary" style="display:block;text-align:center;">Select Package</a>
+    </div>
+
+    <div class="package-card featured">
+      <div class="package-badge">Most Popular</div>
+      <div class="package-name">Basic Plus Package</div>
+      <div class="package-tagline">Deeper clean + protection</div>
+      <div class="package-price">$125</div>
+      <div class="package-price-note">Starting price · varies by size</div>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li>Pre-Wash</li>
+        <li>Wash & Wax</li>
+        <li>Wheel Cleaning</li>
+        <li>Tire Shine</li>
+        <li>Interior Detail</li>
+        <li>Carpet Extraction</li>
+      </ul>
+      <a href="#book" class="btn-primary" style="display:block;text-align:center;">Select Package</a>
+    </div>
+
+    <div class="package-card">
+      <div class="package-name">Premium Package</div>
+      <div class="package-tagline">Full interior restoration + premium exterior</div>
+      <div class="package-price">$175</div>
+      <div class="package-price-note">Starting price · varies by size</div>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li>Pre-Wash</li>
+        <li>Wash & Wax</li>
+        <li>Hand Wax</li>
+        <li>Wheel Cleaning</li>
+        <li>Tire Shine</li>
+        <li>Full Interior Detail</li>
+        <li>Carpet Extraction</li>
+      </ul>
+      <a href="#book" class="btn-secondary" style="display:block;text-align:center;">Select Package</a>
+    </div>
+
+    <div class="package-card">
+      <div class="package-name">Ultimate Package</div>
+      <div class="package-tagline">Complete detail + long-lasting protection</div>
+      <div class="package-price">$250</div>
+      <div class="package-price-note">Starting price · varies by size</div>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li>Pre-Rinse & Pre-Wash</li>
+        <li>6-Month Ceramic Coating or Hand Wax</li>
+        <li>Wheel Cleaning</li>
+        <li>Tire Shine</li>
+        <li>Windshield Ceramic Coating</li>
+        <li>Full Interior Detail</li>
+        <li>Leather Conditioner</li>
+        <li>Engine Bay Cleaning</li>
+      </ul>
+      <a href="#book" class="btn-secondary" style="display:block;text-align:center;">Select Package</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:1.5rem;font-size:0.78rem;color:var(--gray);font-weight:300;">* Prices vary based on vehicle size & condition · Extra charge for large vehicles · Fully mobile — we come to you</p>
+</section>
+
+<!-- MEMBERSHIPS -->
+<section id="memberships">
+  <div class="section-eyebrow">Stay Consistently Clean</div>
+  <h2 class="section-title">MONTHLY MEMBERSHIPS</h2>
+  <p class="section-sub">Keep your car clean and protected all month long. We come to you 3 times per month — no effort required on your end.</p>
+
+  <div class="memberships-grid">
+    <div class="membership-card">
+      <div class="membership-freq">We Come 3× Per Month</div>
+      <div class="membership-name">Basic Membership</div>
+      <div class="membership-price">$150</div>
+      <div class="membership-per">/ month · maintenance package</div>
+      <div class="membership-divider"></div>
+      <ul class="membership-features">
+        <li>Exterior Wash</li>
+        <li>Interior Detail</li>
+        <li>Complimentary Air Freshener</li>
+        <li>Tire Shine</li>
+      </ul>
+      <a href="#book" class="btn-secondary" style="display:block;text-align:center;">Join Now</a>
+    </div>
+
+    <div class="membership-card gold">
+      <div class="membership-freq">We Come 3× Per Month</div>
+      <div class="membership-name">Basic Plus Membership</div>
+      <div class="membership-price">$300</div>
+      <div class="membership-per">/ month · deeper clean + protection</div>
+      <div class="membership-divider"></div>
+      <ul class="membership-features">
+        <li>Pre-Wash</li>
+        <li>Wash & Wax</li>
+        <li>Wheel Cleaning</li>
+        <li>Tire Shine</li>
+        <li>Interior Detail</li>
+        <li>Carpet Extraction</li>
+      </ul>
+      <a href="#book" class="btn-primary" style="display:block;text-align:center;">Join Now</a>
+    </div>
+  </div>
+
+  <div class="member-benefits">
+    <div class="benefit-item"><span class="benefit-icon">📅</span> Priority Scheduling</div>
+    <div class="benefit-item"><span class="benefit-icon">🏷️</span> Discounted Add-Ons for Members</div>
+    <div class="benefit-item"><span class="benefit-icon">🔄</span> Cancel Anytime</div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-eyebrow">The B's Difference</div>
+  <h2 class="section-title">WHY CHOOSE US</h2>
+  <p class="section-sub">We're not a car wash — we're a mobile detailing service that comes to you with professional products and real results.</p>
+
+  <div class="why-points">
+    <div class="why-point">
+      <div class="why-point-num">01</div>
+      <div>
+        <div class="why-point-title">We Come To You</div>
+        <p class="why-point-desc">No drop-off, no waiting rooms. We bring the full detailing experience to your home, office, or anywhere in the Twin Cities metro. Your schedule, your location.</p>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-point-num">02</div>
+      <div>
+        <div class="why-point-title">Professional-Grade Products</div>
+        <p class="why-point-desc">We use top-tier detailing products including ceramic coatings, carpet extractors, and professional waxes — the same quality you'd expect at a high-end shop.</p>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-point-num">03</div>
+      <div>
+        <div class="why-point-title">Packages for Every Budget</div>
+        <p class="why-point-desc">From a quick $85 exterior refresh to our full $250 Ultimate package, we have options for every vehicle and every wallet. No upselling, no surprises.</p>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-point-num">04</div>
+      <div>
+        <div class="why-point-title">Spots Fill Fast</div>
+        <p class="why-point-desc">We're a local, in-demand service — availability is limited. Book early to lock in your preferred time, especially for weekend slots across the Twin Cities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-eyebrow">Client Reviews</div>
+  <h2 class="section-title">WHAT CLIENTS SAY</h2>
+  <p class="section-sub">Real Twin Cities customers, real results.</p>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Brenden came out to my house and did the Ultimate package on my truck. Looked absolutely showroom — I couldn't believe it. The ceramic coating is still beading water weeks later."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MR</div>
+        <div>
+          <div class="author-name">Mike R.</div>
+          <div class="author-vehicle">F-150 · Minneapolis, MN</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"I signed up for the Basic Plus membership and it's honestly one of the best things I've done. My car is cleaner than it's ever been, and I don't have to do a thing. 10/10."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AL</div>
+        <div>
+          <div class="author-name">Ashley L.</div>
+          <div class="author-vehicle">Honda CR-V · St. Paul, MN</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Super convenient and great value. Did the Basic Plus on my SUV and it was spotless inside and out. Booked again the same week. Hard to find this level of service that comes to you."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">JK</div>
+        <div>
+          <div class="author-name">Jake K.</div>
+          <div class="author-vehicle">Chevy Tahoe · Bloomington, MN</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section id="book">
+  <div class="section-eyebrow">Ready to Book?</div>
+  <h2 class="section-title">GET A DETAIL</h2>
+  <p class="section-sub">Fill out the form and Brenden will reach out within a few hours to confirm your appointment. Or just call/text directly — spots fill fast!</p>
+
+  <div class="book-inner">
+    <div class="book-bar"></div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="John">
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Smith">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="(612) 000-0000">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@email.com">
+      </div>
+      <div class="form-group">
+        <label for="vehicle">Your Vehicle</label>
+        <input type="text" id="vehicle" placeholder="2022 Ford F-150">
+      </div>
+      <div class="form-group">
+        <label for="package">Package</label>
+        <select id="package">
+          <option value="">Select a package...</option>
+          <option>Basic Package — From $85</option>
+          <option>Basic Plus Package — From $125</option>
+          <option>Premium Package — From $175</option>
+          <option>Ultimate Package — From $250</option>
+          <option>Basic Membership — $150/mo</option>
+          <option>Basic Plus Membership — $300/mo</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="date">Preferred Date</label>
+        <input type="date" id="date">
+      </div>
+      <div class="form-group">
+        <label for="location">Your Location / Address</label>
+        <input type="text" id="location" placeholder="Minneapolis, MN">
+      </div>
+      <div class="form-group full">
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" placeholder="Vehicle condition, specific concerns, pet hair, stains, anything we should know..."></textarea>
+      </div>
+    </div>
+    <button class="form-submit" onclick="handleSubmit()">Request Appointment →</button>
+    <p style="text-align:center;margin-top:1rem;font-size:0.75rem;color:var(--gray);font-weight:300;">Or call/text Brenden directly at <a href="tel:6123849992" style="color:var(--blue-light);">612-384-9992</a> · Spots fill fast!</p>
+  </div>
+</section>
+
+<!-- SOCIAL STRIP -->
+<div class="social-strip">
+  <span>📱 Follow us on Instagram & Facebook:</span>
+  <a href="https://instagram.com/b_auto_detailing_" target="_blank">@b_auto_detailing_</a>
+  <span>·</span>
+  <a href="mailto:brenden.auto.detailing@gmail.com">brenden.auto.detailing@gmail.com</a>
+  <span>·</span>
+  <a href="tel:6123849992">612-384-9992</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top"></div>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-bee">🐝</div>
+        B'S <span>&nbsp;MOBILE AUTO DETAILING</span>
+      </div>
+      <div class="footer-tagline">We Come To You · Twin Cities, MN</div>
+    </div>
+    <div class="footer-info">
+      <div>📍 Twin Cities Metro Area, MN</div>
+      <div>📞 <a href="tel:6123849992">612-384-9992</a></div>
+      <div>✉️ <a href="mailto:brenden.auto.detailing@gmail.com">brenden.auto.detailing@gmail.com</a></div>
+      <div>📸 <a href="https://instagram.com/b_auto_detailing_" target="_blank">@b_auto_detailing_</a></div>
+      <div style="margin-top:0.4rem;font-size:0.68rem;color:var(--dark-gray);">© 2025 B's Mobile Auto Detailing</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleSubmit() {
+  const name = document.getElementById('fname').value.trim();
+  if (!name) { alert('Please enter your name to continue.'); return; }
+  alert('Thanks ' + name + '! Your request has been sent. Brenden will reach out soon to confirm your appointment. You can also text directly at 612-384-9992. 🐝✨');
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.service-card,.package-card,.membership-card,.testimonial-card,.why-point').forEach(el => {
+  el.style.opacity='0'; el.style.transform='translateY(22px)';
+  el.style.transition='opacity 0.55s ease, transform 0.55s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
